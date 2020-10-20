@@ -1,8 +1,9 @@
 // Módulo com middlewares com o conteúdo para preencher as páginas
 
+const orphanages = require('./database/fakedata.js');
+
 module.exports = {
   index(req, res) {
-    // Escolhe nome da cidade a ser impresso na página index
     return res.render('index');
   },
 
@@ -10,8 +11,9 @@ module.exports = {
     return res.render('orphanage');
   },
 
+  // res.render('página',{dados_para_página})
   orphanages(req, res) {
-    return res.render('orphanages');
+    return res.render('orphanages', { orphanages });
   },
 
   createOrphanage(req, res) {
