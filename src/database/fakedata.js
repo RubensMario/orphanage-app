@@ -1,3 +1,4 @@
+// Módulo de testes para a criação de dados para alimentar a aplicação
 module.exports = [
   {
     id: 1,
