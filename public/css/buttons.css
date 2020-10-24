@@ -41,6 +41,8 @@
   color: #5c8599;
 
   cursor: pointer;
+
+  outline: none;
 }
 
 .button-select button.active {

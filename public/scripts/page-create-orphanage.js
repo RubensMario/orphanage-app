@@ -78,13 +78,27 @@ function toggleSelect(event) {
 
   // pegar o botão clicado
   const button = event.currentTarget;
+  // colocar a classe active
   button.classList.add('active');
 
   // atualizar o input hidden com o valor selecionado
-  const input = document.querySelector('[name="open_on_weekends]');
+  const input = document.querySelector('[name="open_on_weekends"]');
 
-  // verificar se o botão clicado é sim ou não
+  // atribuir ao input (como value) o dado registrado no atributo data
   input.value = button.dataset.value;
+}
 
-  // colocar a classe active
+// Verifica se há ponto selecionado no mapa
+function validate() {
+  const latValue = document.querySelector('[name=lat]').value;
+  const lngValue = document.querySelector('[name=lng]').value;
+
+  const isLatAndLng = latValue && lngValue;
+
+  if (!isLatAndLng) {
+    event.preventDefault();
+    alert(
+      'Selecione um ponto no mapa para indicar a localização do estabelecimento.'
+    );
+  }
 }

@@ -42,7 +42,9 @@ module.exports = {
   async orphanages(req, res) {
     try {
       const db = await Database;
+
       const orphanages = await db.all('SELECT * FROM orphanages');
+
       return res.render('orphanages', { orphanages });
     } catch (error) {
       console.log(error);
@@ -52,5 +54,36 @@ module.exports = {
 
   createOrphanage(req, res) {
     return res.render('create-orphanage');
+  },
+
+  async saveOrphanage(req, res) {
+    const fields = req.body;
+
+    // fields.images='' && URL
+    if (!fields.images)
+      fields.images =
+        'https://empoderadxs.com.br/wp-content/uploads/2020/08/gilbert-baker-pride-flag.jpg';
+
+    try {
+      const db = await Database;
+
+      await saveOrphanage(db, {
+        lat: fields.lat,
+        lng: fields.lng,
+        name: fields.name,
+        about: fields.about,
+        whatsapp: fields.whatsapp,
+        images: fields.images.toString(),
+        instructions: fields.instructions,
+        opening_hours: fields.opening_hours,
+        open_on_weekends: fields.open_on_weekends,
+      });
+
+      // redirecionamento
+      return res.redirect('/orphanages');
+    } catch (error) {
+      console.log(error);
+      res.send('Erro no banco de dados!');
+    }
   },
 };
